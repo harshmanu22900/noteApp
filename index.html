@@ -28,7 +28,7 @@
               </li>
             </ul>
             <form class="d-flex my-2 my-lg-0">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <input class="form-control me-2" type="search" id ="searchTxt" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
           </div>
@@ -111,6 +111,20 @@ if(notesObj.length != 0){
             localStorage.setItem('notes', JSON.stringify(notesObj));
             showNotes();
           }
+             let search = document.getElementById('searchTxt');
+          search.addEventListener('input', function(){
+            let inputVal = search.value;
+            let noteCards = document.getElementsByClassName('noteCard');
+            Array.from(noteCards).forEach(function(element){
+              let cardTxt = element.getElementsByTagName('p')[0].innerText;
+              if(cardTxt.includes(inputVal)){
+                element.style.display = 'block';
+              }
+              else{
+                element.style.display = 'none';
+              }
+            })
+          })
           
         </script>
 </body>
